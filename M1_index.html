@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>M-1 決勝進出者予想バトル</title>
+    <link rel="stylesheet" href="M1_style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🏆 M-1 予想バトル</h1>
+        <div id="connection-status" class="status-indicator">通信待機中...</div>
+    </header>
+
+    <section id="screen-select-player" class="screen active">
+        <div class="card intro-card">
+            <h2>エントリー</h2>
+            <p>自分の名前を選んでください</p>
+            <div class="player-buttons">
+                <button onclick="selectPlayer('A')" id="btn-player-a">読み込み中...</button>
+                <button onclick="selectPlayer('B')" id="btn-player-b">読み込み中...</button>
+            </div>
+            <div id="status-display" class="status-box">
+                データ読み込み中...
+            </div>
+        </div>
+        
+        <div id="common-area" class="card action-card" style="display:none;">
+            <h3>✨ 両者の予想が完了！ ✨</h3>
+            <p>お互いの予想を見せ合いましょう</p>
+            
+            <button class="primary-btn" onclick="goToReveal()" style="margin-bottom: 10px; background: #333;">
+                👀 お互いの予想を公開！
+            </button>
+            
+            <hr style="margin: 15px 0; border:none; border-top:1px solid #eee;">
+            
+            <p style="font-size:0.8rem; color:#666;">公式発表が始まったらこちら↓</p>
+            <button class="secondary-btn" onclick="goToResultEntry()" style="color:var(--accent); text-decoration:none; border:1px solid var(--accent); border-radius:50px; padding:10px;">
+                🔥 決勝進出者を入力して判定
+            </button>
+        </div>
+        
+        <div style="margin-top:20px; text-align:right;">
+             <button class="text-btn" onclick="resetApp()">⚠️ 全データをリセット</button>
+        </div>
+    </section>
+
+    <section id="screen-prediction" class="screen">
+        <h2 id="current-player-name">-- の予想</h2>
+        <div class="sticky-header">
+            <div class="count-display">
+                本命: <span id="main-count" class="big-num">0</span>/9 <span class="sep">|</span> 
+                予備: <span id="reserve-count" class="big-num">0</span>/3
+            </div>
+        </div>
+        
+        <p class="instruction">①本命9組 → ②予備3組 の順で選択</p>
+        
+        <div id="performer-list" class="performer-grid">
+            </div>
+
+        <div class="footer-actions">
+            <button id="submit-prediction" class="primary-btn" disabled onclick="submitPrediction()">予想を確定する</button>
+            <button class="secondary-btn" onclick="backToTop()">戻る</button>
+        </div>
+    </section>
+
+    <section id="screen-reveal" class="screen">
+        <div class="result-header">
+            <h2>👀 予想リスト公開 👀</h2>
+            <p>同じ予想は青色で並んでいます</p>
+        </div>
+
+        <div class="card" style="padding: 10px 5px;">
+            <div id="reveal-container"></div>
+        </div>
+
+        <div class="footer-actions" style="position:static; box-shadow:none; margin-top:20px;">
+            <p style="text-align:center; font-size:0.9rem;">決勝進出者が発表されたら...</p>
+            <button class="primary-btn" onclick="goToResultEntry()">🔥 結果を入力して勝敗判定！</button>
+            <button class="secondary-btn" onclick="backToTop()">トップへ戻る</button>
+        </div>
+    </section>
+
+    <section id="screen-result" class="screen">
+        <div class="result-header">
+            <h2>🔥 結果発表 🔥</h2>
+            <p>公式発表された9組を選択してください</p>
+        </div>
+        
+        <div id="official-list" class="performer-grid small-grid">
+            </div>
+        
+        <button class="primary-btn" onclick="calculateResult()">勝敗判定！</button>
+
+        <div id="battle-result" class="result-area" style="display:none;">
+            <div class="winner-announce" id="winner-announce"></div>
+            
+            <div class="score-board">
+                <div class="score-box">
+                    <h4 id="label-score-a">Player A</h4>
+                    <p class="score-num" id="score-a">-</p>
+                    <p class="sub-score">予備的中: <span id="sub-a">-</span></p>
+                </div>
+                <div class="vs">VS</div>
+                <div class="score-box">
+                    <h4 id="label-score-b">Player B</h4>
+                    <p class="score-num" id="score-b">-</p>
+                    <p class="sub-score">予備的中: <span id="sub-b">-</span></p>
+                </div>
+            </div>
+            
+            <div class="detail-comparison">
+                <div class="comparison-col">
+                    <h5 id="label-list-a">Aの予想</h5>
+                    <ul id="list-a"></ul>
+                </div>
+                <div class="comparison-col">
+                    <h5 id="label-list-b">Bの予想</h5>
+                    <ul id="list-b"></ul>
+                </div>
+            </div>
+        </div>
+        
+        <button class="secondary-btn" onclick="backToTop()">トップへ戻る</button>
+    </section>
+</div>
+
+<script src="M1_script.js"></script>
+</body>
+</html>

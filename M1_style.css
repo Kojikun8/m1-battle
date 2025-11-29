@@ -1,0 +1,67 @@
+:root {
+    --primary: #d4af37; --accent: #b30000; --bg: #f8f8f8; --text: #333; --card-bg: #fff; --success: #28a745; --match-bg: #e6f7ff; --match-text: #005a87;
+}
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif; background-color: var(--bg); color: var(--text);
+    margin: 0; padding: 10px; display: flex; justify-content: center; -webkit-tap-highlight-color: transparent;
+}
+.container { max-width: 500px; width: 100%; margin-bottom: 60px; }
+header { text-align: center; margin-bottom: 15px; }
+h1 { margin: 0; font-size: 1.6rem; color: var(--accent); font-weight: 900; }
+.status-indicator { font-size: 0.75rem; color: #888; margin-top: 5px; }
+.card {
+    background: var(--card-bg); padding: 20px; border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 15px; text-align: center;
+}
+.screen { display: none; }
+.screen.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.player-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+.player-buttons button {
+    padding: 20px 5px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
+    background: white; border: 2px solid #ddd; border-radius: 10px; transition: 0.2s; word-break: break-all;
+}
+.player-buttons button:active { transform: translateY(2px); background: #eee; }
+.status-box { background: #f0f0f0; padding: 10px; border-radius: 8px; font-size: 0.85rem; text-align: left; }
+.performer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; padding-bottom: 80px; }
+.performer-card {
+    background: #fff; border: 1px solid #ddd; padding: 12px 5px; text-align: center;
+    border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: bold; user-select: none;
+}
+.performer-card.selected-main { background-color: var(--primary); color: white; border-color: var(--primary); }
+.performer-card.selected-reserve { background-color: #666; color: white; border-color: #666; }
+.sticky-header {
+    position: sticky; top: 0; background: rgba(248, 248, 248, 0.95); padding: 10px 0;
+    z-index: 100; border-bottom: 1px solid #eee; margin-bottom: 10px; display: flex; justify-content: flex-end;
+}
+.count-display { font-weight: bold; font-size: 1rem; }
+.big-num { font-size: 1.3rem; color: var(--accent); }
+.footer-actions {
+    position: fixed; bottom: 0; left: 0; right: 0; background: #fff;
+    padding: 15px; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; gap: 10px;
+}
+.primary-btn {
+    width: 100%; padding: 14px; font-size: 1.1rem; font-weight: bold; border: none;
+    border-radius: 50px; cursor: pointer; background: var(--accent); color: white;
+}
+.primary-btn:disabled { background: #ccc; }
+.secondary-btn { width: 100%; padding: 10px; border: none; background: transparent; color: #666; text-decoration: underline; }
+.winner-announce { font-size: 1.4rem; font-weight: 900; color: var(--primary); text-align: center; margin-bottom: 15px; }
+.score-board { display: flex; background: #fff; padding: 15px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.score-box { flex: 1; text-align: center; }
+.vs { align-self: center; font-weight: bold; color: #ccc; }
+.score-num { font-size: 2.5rem; margin: 5px 0; font-weight: 800; color: var(--text); }
+.detail-comparison { margin-top: 20px; font-size: 0.9rem; }
+.comparison-col ul { list-style: none; padding: 0; }
+.comparison-col li { padding: 5px 0; border-bottom: 1px solid #eee; }
+.hit { color: var(--accent); font-weight: bold; float: right; }
+.text-btn { background: none; border: none; color: #999; font-size: 0.8rem; }
+
+/* 新しい比較表のデザイン */
+.comp-table { width: 100%; margin-top: 10px; font-size: 0.95rem; }
+.comp-row { display: flex; align-items: center; padding: 5px 0; border-bottom: 1px solid #eee; }
+.comp-header { font-weight: bold; background: #333; color: #fff; padding: 8px 0; border-radius: 5px 5px 0 0; }
+.comp-col { flex: 1; text-align: center; padding: 0 5px; word-break: break-all; }
+.comp-sep { background: #eee; font-size: 0.8rem; padding: 5px 0; font-weight: bold; color: #666; }
+.match-row { background-color: var(--match-bg); color: var(--match-text); font-weight: bold; }
+.match-icon { color: #00aaff; margin-right: 3px; }
