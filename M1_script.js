@@ -6,14 +6,13 @@ const NAME_B = "凛太郎";  // 2人目の名前
 // ==========================================
 
 const PERFORMERS = [
-    "真空ジェシカ", "豪快キャプテン", "おおぞらモード", "20世紀",
-    "今夜も星が綺麗", "ひつじねいり", "フランツ", "ヨネダ2000",
-    "ゼロカラン", "大王", "センチネル", "めぞん",
-    "ドンテコルテ", "イチゴ", "カナメストーン", "ミカボ",
-    "エバース", "例えば炎", "たくろう", "生姜猫",
-    "ネコニスズ", "ドーナツ・ピーナツ", "ヤーレンズ", "TCクラクション",
-    "ママタルト", "黒帯", "カベポスター", "スタミナパン",
-    "ミキ", "豆鉄砲", "ワイルドカード"
+    "あなたとネ", "うただ", "うちまつげ", "蛙亭",
+    "カベポスター", "かもめんたる", "からし蓮根", "コットン",
+    "今夜も星が綺麗", "ザ・プラン9", "スタミナパン", "ゼロカラン",
+    "セルライトスパ", "滝音", "男性ブランコ", "ダンビラムーチョ",
+    "TCクラクション", "ドンデコルテ", "ナチョス", "ななまがり",
+    "ビスケットブラザーズ", "フランスピアノ", "マイスイートメモリーズ", "見取り図",
+    "隣人"
 ];
 
 let appState = {
@@ -119,10 +118,10 @@ function toggleSelection(name, el) {
         tempSelection.reserve = tempSelection.reserve.filter(n => n !== name);
         el.classList.remove('selected-reserve');
     } else {
-        if (tempSelection.main.length < 9) {
+        if (tempSelection.main.length < 7) {
             tempSelection.main.push(name); el.classList.add('selected-main');
         } else if (tempSelection.reserve.length < 3) {
-            if(tempSelection.main.length < 9) return alert("先に本命9組を選んで！");
+            if(tempSelection.main.length < 7) return alert("先に本命7組を選んで！");
             tempSelection.reserve.push(name); el.classList.add('selected-reserve');
         }
     }
@@ -132,7 +131,7 @@ function updateCountDisplay() {
     document.getElementById('main-count').innerText = tempSelection.main.length;
     document.getElementById('reserve-count').innerText = tempSelection.reserve.length;
     const btn = document.getElementById('submit-prediction');
-    if (tempSelection.main.length === 9 && tempSelection.reserve.length === 3) {
+    if (tempSelection.main.length === 7 && tempSelection.reserve.length === 3) {
         btn.disabled = false; btn.innerText = "これで確定する！";
     } else {
         btn.disabled = true; btn.innerText = "選択中...";
@@ -211,7 +210,7 @@ function setupResultScreen() {
 }
 function calculateResult() {
     const officialResults = Array.from(document.querySelectorAll('#official-list .selected-main')).map(el => el.innerText);
-    if (officialResults.length !== 9) return alert("9組選んでください");
+    if (officialResults.length !== 7) return alert("7組選んでください");
 
     const scoreA = countHits(appState.playerA.main, officialResults);
     const scoreB = countHits(appState.playerB.main, officialResults);
